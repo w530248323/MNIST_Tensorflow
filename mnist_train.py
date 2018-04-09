@@ -26,11 +26,11 @@ def train(mnist):
         mnist_inference.IMAGE_SIZE,
         mnist_inference.NUM_CHANNELS],  # 第四维表示图片的深度
                        name='x-input')
+    # None表示第一维是任意数量，可以方便使用不同的batch大小
     y_ = tf.placeholder(tf.float32, [None, mnist_inference.OUTPUT_NODE], name='y-input')
-
     # 直接使用mnist_inference.py中定义的前向传播过程
     y = mnist_inference.inference(x, True)
-    global_step = tf.Variable(0, trainable=False)   # 迭代的计数器
+    global_step = tf.Variable(0, trainable=False)   # 迭代iteration的计数器
 
     # 定义损失函数、学习率以及训练过程
     # 计算交叉熵作为刻画预测值和真实值之间差距的损失函数，这里使用Tensorflow中提供的
@@ -45,14 +45,6 @@ def train(mnist):
                                                LEARNING_RATE_DECAY, staircase=True)     # 学习率下降，每训练550轮，学习率乘以0.99
     train_step = tf.train.GradientDescentOptimizer(learning_rate).minimize(loss, global_step=global_step)   # 小批量梯度下降
 
-    # 在训练神经网络模型时，每过一遍数据要通过反向传播来更新神经网络中的参数。
-    # TensorFlow提供了tf.control_dependencies和tf.group两种机制。
-    # 下面两行程序和train_op = tf.group(train_step, variables_averages_op)是等价的。
-    # with tf.control_dependencies([train_step]):
-    #    train_op = tf.no_op(name='train')    # Does nothing. Only useful as a placeholder for control edges.
-    # tf.control_dependencies()控制计算流图的，给图中的某些计算指定顺序，可以确保train_step在被刷新之后,再执行定义的内容，从而保证计算顺序的正确性。
-    train_op = tf.group(train_step)
-
     # 初始化Tensorflow持久化类
     saver = tf.train.Saver()
     with tf.Session() as sess:  # 创建一个会话
@@ -65,7 +57,7 @@ def train(mnist):
                                           mnist_inference.IMAGE_SIZE,
                                           mnist_inference.NUM_CHANNELS))
             # 占位符并没有初始值，它只会分配必要的内存。在会话中，占位符可以使用feed_dict馈送数据。
-            _, loss_value, step = sess.run([train_op, loss, global_step], feed_dict={x: reshaped_xs, y_: ys})       # ？？？？？？？？？
+            _, loss_value, step = sess.run([train_step, loss, global_step], feed_dict={x: reshaped_xs, y_: ys})
             # 每100轮保存一次模型
             if i % 100 == 0:
                 # 输出当前的训练情况。这里只输出了模型在当前训练batch上的损失函数大小。通过损失函数的大小可以大概了解训练的情况
