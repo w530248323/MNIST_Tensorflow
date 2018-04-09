@@ -12,7 +12,7 @@ EVAL_INTERVAL_SECS = 10
 
 
 def evaluate(mnist):
-    with tf.Graph().as_default():
+    with tf.Graph().as_default():       # ？？？？？？？？？
         # 定义输入输出的格式
         x = tf.placeholder(tf.float32, [
             mnist.validation.num_examples,  # 第一维表示样例的个数
@@ -47,7 +47,7 @@ def evaluate(mnist):
                     # 加载模型
                     saver.restore(sess, ckpt.model_checkpoint_path)     # 加载模型参数
                     # 通过文件名得到模型保存时迭代的轮数
-                    global_step = ckpt.model_checkpoint_path.split('-')[-1]     # ？？？？？
+                    global_step = ckpt.model_checkpoint_path.split('-')[-1]
                     accuracy_score = sess.run(accuracy, feed_dict=validate_feed)
                     print("After %s training step(s), validation accuracy = %f" % (global_step, accuracy_score))
                 else:

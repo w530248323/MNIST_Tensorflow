@@ -66,7 +66,7 @@ def train(mnist):
                                           mnist_inference.NUM_CHANNELS))
             # 占位符并没有初始值，它只会分配必要的内存。在会话中，占位符可以使用feed_dict馈送数据。
             _, loss_value, step = sess.run([train_op, loss, global_step], feed_dict={x: reshaped_xs, y_: ys})       # ？？？？？？？？？
-            # 每1000轮保存一次模型
+            # 每100轮保存一次模型
             if i % 100 == 0:
                 # 输出当前的训练情况。这里只输出了模型在当前训练batch上的损失函数大小。通过损失函数的大小可以大概了解训练的情况
                 # 在验证数据集上的正确率信息会有一个单独的程序来生成
