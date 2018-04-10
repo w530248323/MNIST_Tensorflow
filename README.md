@@ -6,7 +6,7 @@
 * -model                             //存放模型的文件夹<br>
 * -mnist_inference.py     //定义了前向传播的过程以及神经网络中的参数<br>
 * -mnist_train.py               //定义了神经网络的训练过程<br>
-* -mnist_eval.py               //定义了测试过程 
+* -mnist_eval.py                //定义了测试过程 
 
 
 ## MNIST 数据集
