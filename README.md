@@ -21,12 +21,12 @@
 ## Net网络结构：
 ![Alt text](https://upload-images.jianshu.io/upload_images/11573712-ee2cfafeb0c48db6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700)
 * INPUT: [28x28x1]                weights: 0<br>
-* CONV5-32: [28x28x32]     weights: (5*5*1+1)*32<br>
+* CONV5-32: [28x28x32]     weights: (5 * 5 * 1 + 1) * 32<br>
 * POOL2: [14x14x32]              weights: 0<br>
-* CONV5-64: [14x14x64]      weights: (5*5*32+1)*64<br>
+* CONV5-64: [14x14x64]      weights: (5 * 5 * 32 + 1) * 64<br>
 * POOL2: [7x7x64]                  weights: 0<br>
-* FC: [1x1x512]                        weights: (7*7*64+1)*512<br>
-* FC: [1x1x10]                           weights: (1*1*512+1)*10<br>
+* FC: [1x1x512]                        weights: (7 * 7 * 64 + 1) * 512<br>
+* FC: [1x1x10]                           weights: (1 * 1 * 512 + 1) * 10<br>
 
 
 
