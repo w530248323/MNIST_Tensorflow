@@ -31,12 +31,11 @@ def train(mnist):
     y = mnist_inference.inference(x, True)
     global_step = tf.Variable(0, trainable=False)   # 迭代iteration的计数器
 
-    # 定义损失函数、学习率以及训练过程
-    # 计算交叉熵作为刻画预测值和真实值之间差距的损失函数，这里使用Tensorflow中提供的
-    # sparse_softmax_cross_entropy_with_logits函数来计算交叉熵。当分类问题只有一个正确答案时，
-    # 可以使用这个函数来加速交叉熵的计算。这个函数的第一个参数是神经网络不包括softmax的前向传播结果
-    # 第二个是训练数据的正确答案。因为标准答案是一个长度为10的一维数组，而该函数需要提供的是
-    # 一个正确答案的数字，所以需要使用tf.argmax(y_,1)函数来得到正确答案的编号
+    # 计算交叉熵作为刻画预测值和真实值之间差距的损失函数，这里使用Tensorflow中提供的函数来计算交叉熵。
+    # 当分类问题只有一个正确答案时，可以使用这个函数来加速交叉熵的计算。
+    # 这个函数的第一个参数是神经网络不包括softmax的前向传播结果。
+    # 第二个是训练数据的正确答案。y_是一个batchsize*10的二维数组，每一行表示一个样例的前向传播结果
+    # 1表示选取最大值的操作只在第一个维度进行，即每一行选取最大值对应的小标，得到了一个长度为batchsize的一维数组
     cross_entropy = tf.nn.sparse_softmax_cross_entropy_with_logits(logits=y, labels=tf.argmax(y_, 1))
     cross_entropy_mean = tf.reduce_mean(cross_entropy)  # 计算在当前batch中所有样例的交叉熵平均值。
     loss = cross_entropy_mean

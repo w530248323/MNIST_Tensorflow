@@ -25,7 +25,7 @@ def inference(input_tensor, train):
     # 声明第一层神经网络的变量并完成前向传播过程
     # 和标准LeNet-5模型不大一样，这里定义卷积层的输入为28*28*1的原始MNIST图片像素
     # 因为卷积层中使用了全0填充，所以输出为28*28*32的矩阵
-    with tf.variable_scope('layer1-conv1'):  # variable_scope:大部分情况下，跟 tf.get_variable() 配合使用，实现变量共享的功能。
+    with tf.variable_scope('layer1-conv1'):
         conv1_weights = tf.get_variable(
             "weight", [CONV1_SIZE, CONV1_SIZE, NUM_CHANNELS, CONV1_DEEP],
             initializer=tf.truncated_normal_initializer(stddev=0.1))  # 截断正态分布初始化参数
