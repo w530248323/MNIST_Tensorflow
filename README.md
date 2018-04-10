@@ -6,7 +6,8 @@
 * -model                             //存放模型的文件夹<br>
 * -mnist_inference.py     //定义了前向传播的过程以及神经网络中的参数<br>
 * -mnist_train.py               //定义了神经网络的训练过程<br>
-* -mnist_eval.py               //定义了测试过程<br>  
+* -mnist_eval.py               //定义了测试过程 
+
 
 ## MNIST 数据集
 | 文件 | 内容 | 
@@ -15,6 +16,7 @@
 | train-labels-idx1-ubyte.gz | 训练集图片对应的数字标签 | 
 | t10k-images-idx3-ubyte.gz | 测试集图片：10000张图片 |
 | t10k-labels-idx1-ubyte.gz | 测试集图片对应的数字标签 |
+
 
 ## Net网络结构：
 ![Alt text](https://upload-images.jianshu.io/upload_images/11573712-ee2cfafeb0c48db6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700)
