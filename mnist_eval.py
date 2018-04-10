@@ -3,7 +3,6 @@ import time
 import numpy as np
 import tensorflow as tf
 from tensorflow.examples.tutorials.mnist import input_data
-# 加载mnist_inference.py 和 mnist_train.py中定义的常量和函数
 import mnist_inference
 import mnist_train
 
@@ -12,7 +11,7 @@ EVAL_INTERVAL_SECS = 10
 
 
 def evaluate(mnist):
-    with tf.Graph().as_default():       # ？？？？？？？？？
+    with tf.Graph().as_default():
         # 定义输入输出的格式
         x = tf.placeholder(tf.float32, [
             mnist.validation.num_examples,  # 第一维表示样例的个数

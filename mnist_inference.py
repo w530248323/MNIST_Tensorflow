@@ -1,13 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-INPUT: [28x28x1]             weights: 0
-CONV5-32: [28x28x32]         weights: (5*5*1+1)*32
-POOL2: [14x14x32]            weights: 0
-CONV5-64: [14x14x64]         weights: (5*5*32+1)*64
-POOL2: [7x7x64]              weights: 0
-FC: [1x1x512]                weights: (7*7*64+1)*512
-FC: [1x1x10]                 weights: (1*1*512+1)*10
-"""
 import tensorflow as tf
 
 # 定义神经网络相关的参数
