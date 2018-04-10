@@ -15,6 +15,6 @@
 * CONV5-64: [14x14x64]      weights: (5*5*32+1)*64<br>
 * POOL2: [7x7x64]                  weights: 0<br>
 * FC: [1x1x512]                        weights: (7*7*64+1)*512<br>
-* FC: [1x1x10]                            weights: (1*1*512+1)*10<br>
+* FC: [1x1x10]                           weights: (1*1*512+1)*10<br>
   
   
