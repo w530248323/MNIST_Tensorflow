@@ -26,8 +26,8 @@ def evaluate(mnist):
                                                                  mnist_inference.IMAGE_SIZE,
                                                                  mnist_inference.NUM_CHANNELS)),
                          y_: mnist.validation.labels}
-        # 直接通过调用封装好的函数来计算前向传播的结果。
-        y = mnist_inference.inference(x, False)
+        # 直接通过调用mnist_inference.py中的函数来计算前向传播的结果。
+        y = mnist_inference.inference(x)
         # 如果需要对未知的样例进行分类，使用tf.argmax(y, 1)能给出某个tensor对象在某一维上的其数据最大值所在的索引值。
         # 由于标签向量是由0,1组成，因此最大值1所在的索引位置就是类别标签，
         # 我们可以用 tf.equal 来检测我们的预测是否真实标签匹配。

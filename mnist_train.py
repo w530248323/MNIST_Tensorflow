@@ -28,7 +28,7 @@ def train(mnist):
     # None表示第一维是任意数量，可以方便使用不同的batch大小
     y_ = tf.placeholder(tf.float32, [None, mnist_inference.OUTPUT_NODE], name='y-input')
     # 直接使用mnist_inference.py中定义的前向传播过程
-    y = mnist_inference.inference(x, True)
+    y = mnist_inference.inference(x)
     global_step = tf.Variable(0, trainable=False)   # 迭代iteration的计数器
 
     # 计算交叉熵作为刻画预测值和真实值之间差距的损失函数，这里使用Tensorflow中提供的函数来计算交叉熵。

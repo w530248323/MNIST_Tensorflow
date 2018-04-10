@@ -20,8 +20,7 @@ FC_SIZE = 512
 
 
 # 定义神经网络的前向传播过程
-# 参数train用于区别训练过程和测试过程。训练过程引入dropout，可以进一步提升模型可靠性并防止过拟合
-def inference(input_tensor, train):
+def inference(input_tensor):
     # 声明第一层神经网络的变量并完成前向传播过程
     # 和标准LeNet-5模型不大一样，这里定义卷积层的输入为28*28*1的原始MNIST图片像素
     # 因为卷积层中使用了全0填充，所以输出为28*28*32的矩阵
@@ -69,14 +68,11 @@ def inference(input_tensor, train):
 
     # 声明第五层全连接层的变量并实现前向传播过程
     # 这一层的输入是拉直之后的一组向量，向量长度为7*7*64=3136，输出是一组长度为512的向量
-    # dropout在训练时会随机将部分节点的输出改为0，可以避免过拟合问题，dropout一般只在全连接层而不是卷积层或者池化层使用
     with tf.variable_scope('layer5-fc1'):
         fc1_weights = tf.get_variable("weight", [nodes, FC_SIZE],
                                       initializer=tf.truncated_normal_initializer(stddev=0.1))
         fc1_biases = tf.get_variable('bias', [FC_SIZE], initializer=tf.constant_initializer(0.1))
         fc1 = tf.nn.relu(tf.matmul(reshaped, fc1_weights) + fc1_biases)
-        if train:
-            fc1 = tf.nn.dropout(fc1, 0.5)
 
     # 声明第六层全连接层的变量并实现前向传播过程。
     # 这一层的输入是一组长度为512的向量，输出是一组长度为10的向量。
