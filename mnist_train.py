@@ -39,6 +39,8 @@ def train(mnist):
     cross_entropy = tf.nn.sparse_softmax_cross_entropy_with_logits(logits=y, labels=tf.argmax(y_, 1))
     cross_entropy_mean = tf.reduce_mean(cross_entropy)  # 计算在当前batch中所有样例的交叉熵平均值。
     loss = cross_entropy_mean
+    # decayed_learning_rate=LEARNING_RATE_BASE*LEARNING_RATE_DECAY^(global_step/decay_steps)
+    # staircase=True，global_step/decay_steps则被转化为整数
     learning_rate = tf.train.exponential_decay(LEARNING_RATE_BASE, global_step, mnist.train.num_examples / BATCH_SIZE,
                                                LEARNING_RATE_DECAY, staircase=True)     # 学习率下降，每训练550轮，学习率乘以0.99
     train_step = tf.train.GradientDescentOptimizer(learning_rate).minimize(loss, global_step=global_step)   # 小批量梯度下降
